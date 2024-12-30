@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Skill Tree</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #skillTree {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .node {
+      padding: 10px;
+      border: 2px solid #444;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+    }
+    .locked {
+      background-color: #888;
+    }
+    .unlocked {
+      background-color: #4caf50;
+    }
+    .final {
+      background-color: #ff9800;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive Skill Tree: Drawing Anatomy</h1>
+  <p>Hover over nodes for details. Click to mark skills as unlocked (requires minor JavaScript edits).</p>
+
+  <div id="skillTree"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.15.1/flowchart.min.js"></script>
+  <script>
+    const diagramCode = `
+      start=>start: Start Drawing Skills
+      gesture=>operation: Gesture Drawing
+      proportions=>operation: Proportions
+      skeletal=>operation: Basic Skeletal Structure
+      anatomy=>condition: Focus on Anatomy?
+      muscles=>operation: Muscle Groups
+      joints=>operation: Joints and Limbs
+      final_body=>operation: Master Body Drawing
+
+      head_face=>operation: Head and Facial Features
+      expressions=>operation: Facial Expressions
+      final_face=>operation: Master Portraits
+
+      hands=>operation: Hands and Feet
+      dynamic_poses=>operation: Dynamic Poses
+      final_advanced=>operation: Master Advanced Anatomy
+
+      start->gesture->proportions->skeletal->anatomy(yes)->muscles->joints->final_body
+      anatomy(no)->head_face->expressions->final_face
+      muscles->hands->dynamic_poses->final_advanced
+    `;
+
+    const diagram = flowchart.parse(diagramCode);
+    diagram.drawSVG('skillTree', {
+      'x': 0,
+      'y': 0,
+      'line-width': 2,
+      'line-length': 50,
+      'text-margin': 10,
+      'font-size': 14,
+      'font-color': '#333',
+      'line-color': '#444',
+      'element-color': '#888',
+      'fill': '#f0f0f0',
+      'yes-text': 'Yes',
+      'no-text': 'No',
+    });
+
+    // Optional: Add interactivity here with JavaScript for unlocks.
+  </script>
+</body>
+</html>
